@@ -51,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
             if (startSlide && (speedVar <= speed))
             {
                 startSlide = false;
-                speedVar += 6f;
+                speedVar += 4f;
             }
             speedVar -= speedSlideDecrease * Time.deltaTime;
 
