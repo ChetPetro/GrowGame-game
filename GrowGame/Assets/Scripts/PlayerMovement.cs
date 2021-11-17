@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public CharacterController controller;
+    public PlayerGrow playerGrow;
     public Transform playerBody;
     public float scaleChange = 0.75f;
 
@@ -53,32 +54,33 @@ public class PlayerMovement : MonoBehaviour
                 speedVar += 6f;
             }
             speedVar -= speedSlideDecrease * Time.deltaTime;
+
             if(speedVar < 0)
             {
                 speedVar = 0;
             }
 
-            playerBody.transform.localScale = new Vector3(1f, 1f * scaleChange, 1f);
+            playerBody.transform.localScale = new Vector3(playerGrow.scale, playerGrow.scale * scaleChange, playerGrow.scale);
         }
         else
         {
             startSlide = true;
             speedVar = speed;
-            playerBody.transform.localScale = new Vector3(1f, 1f, 1f);
+            playerBody.transform.localScale = new Vector3(playerGrow.scale, playerGrow.scale, playerGrow.scale);
         }
 
         if (Input.GetKey("left shift"))
         {
-            controller.Move(move * speedVar * sprintModifier * Time.deltaTime);
+            controller.Move(move * speedVar * sprintModifier * playerGrow.scale * Time.deltaTime); ;
         }
         else
         {
-            controller.Move(move * speedVar * Time.deltaTime);
+            controller.Move(move * speedVar * playerGrow.scale * Time.deltaTime);
         }
 
         if(Input.GetButtonDown("Jump") && isGrounded)
         {
-            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            velocity.y = Mathf.Sqrt(jumpHeight * playerGrow.scale * -2f * gravity);
         }
 
 
