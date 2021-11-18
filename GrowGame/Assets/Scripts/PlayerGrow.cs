@@ -22,12 +22,12 @@ public class PlayerGrow : MonoBehaviour
 
         }else if(Input.GetMouseButton(0))
         {
-            if(scale < 4.0f)
+            if(scale < 3.0f)
             {
                 scale += scaleDiff * Time.deltaTime;
-            }else if(scale > 4.0f)
+            }else if(scale > 3.0f)
             {
-                scale = 4.0f;
+                scale = 3.0f;
             }
 
         }else if(Input.GetMouseButton(1))

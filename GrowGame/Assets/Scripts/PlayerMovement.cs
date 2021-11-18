@@ -46,16 +46,17 @@ public class PlayerMovement : MonoBehaviour
         
         Vector3 move = transform.right * x + transform.forward * z;
 
+ 
         if (Input.GetKey("c"))
         {
             if (startSlide && (speedVar <= speed))
             {
                 startSlide = false;
-                speedVar += 4f;
+                speedVar += 1.5f;
             }
             speedVar -= speedSlideDecrease * Time.deltaTime;
 
-            if(speedVar < 0)
+            if (speedVar < 0)
             {
                 speedVar = 0;
             }
@@ -71,14 +72,18 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKey("left shift"))
         {
-            controller.Move(move * speedVar * sprintModifier * playerGrow.scale * Time.deltaTime); ;
+            sprintModifier = 2f;
         }
         else
         {
-            controller.Move(move * speedVar * playerGrow.scale * Time.deltaTime);
+            sprintModifier = 1f;
         }
+        
+       
+         controller.Move(move * speedVar * sprintModifier * playerGrow.scale * Time.deltaTime);
 
-        if(Input.GetButtonDown("Jump") && isGrounded)
+
+        if (Input.GetButtonDown("Jump") && isGrounded)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * playerGrow.scale * -2f * gravity);
         }
