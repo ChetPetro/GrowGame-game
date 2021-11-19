@@ -21,8 +21,15 @@ public class PlayerMovement : MonoBehaviour
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
 
+    public LayerMask badGroundMask;
+    private bool isBadGrounded;
+    public Transform spawnPoint;
+
+    public LayerMask finshLineMask;
+    private bool isFinished;
+
     Vector3 velocity;
-    bool isGrounded;
+    private bool isGrounded;
 
     // Start is called before the first frame update
     void Start()
@@ -92,5 +99,19 @@ public class PlayerMovement : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
 
         controller.Move(velocity * Time.deltaTime);
+
+        isBadGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, badGroundMask);
+
+        if (isBadGrounded)
+        {
+            playerBody.position = spawnPoint.position;
+        }
+
+        isFinished = Physics.CheckSphere(playerBody.position, playerGrow.scale, finshLineMask);
+
+        if (isFinished)
+        {
+            Debug.Log("Finshed");
+        }
     }
 }
