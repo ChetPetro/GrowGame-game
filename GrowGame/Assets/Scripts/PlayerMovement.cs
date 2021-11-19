@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
     public CharacterController controller;
     public PlayerGrow playerGrow;
     public Transform playerBody;
+    public Timer timerText;
     public float scaleChange = 0.75f;
 
     public float sprintModifier = 2f;
@@ -22,11 +23,12 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask groundMask;
 
     public LayerMask badGroundMask;
-    private bool isBadGrounded;
+    public bool isBadGrounded;
     public Transform spawnPoint;
 
     public LayerMask finshLineMask;
     private bool isFinished;
+    public bool finished;
 
     Vector3 velocity;
     private bool isGrounded;
@@ -35,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         speedVar = speed;
+        finished = false;
     }
 
     // Update is called once per frame
@@ -105,12 +108,14 @@ public class PlayerMovement : MonoBehaviour
         if (isBadGrounded)
         {
             playerBody.position = spawnPoint.position;
+            playerBody.rotation = Quaternion.Euler(0f, 0f, 0f);
         }
 
-        isFinished = Physics.CheckSphere(playerBody.position, playerGrow.scale, finshLineMask);
+        isFinished = Physics.CheckSphere(groundCheck.position, groundDistance, finshLineMask);
 
         if (isFinished)
         {
+            finished = true;
             Debug.Log("Finshed");
         }
     }

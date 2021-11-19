@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerGrow : MonoBehaviour
 {
     public Transform playerBody;
+    public PlayerMovement playerMovement;
     public float scaleDiff = 1f;
     public float scale = 1f;
     // Start is called before the first frame update
@@ -16,6 +17,11 @@ public class PlayerGrow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(playerMovement.isBadGrounded)
+        {
+            scale = 1f;
+        }
+
 
         if(Input.GetMouseButton(0) && Input.GetMouseButton(1))
         {
