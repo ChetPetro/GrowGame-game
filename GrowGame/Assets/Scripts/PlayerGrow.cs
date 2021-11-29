@@ -17,12 +17,6 @@ public class PlayerGrow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(playerMovement.isBadGrounded)
-        {
-            scale = 1f;
-        }
-
-
         if(Input.GetMouseButton(0) && Input.GetMouseButton(1))
         {
 

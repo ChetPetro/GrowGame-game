@@ -33,16 +33,32 @@ public class PlayerMovement : MonoBehaviour
     Vector3 velocity;
     private bool isGrounded;
 
+    public Canvas leaderboardCanvas;
+    public Leaderboard leaderboard;
+
+    public LayerMask startLineMask;
+    private bool isStarted;
+    public bool started;
+
+
     // Start is called before the first frame update
     void Start()
     {
         speedVar = speed;
         finished = false;
+        started = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        isStarted = Physics.CheckSphere(groundCheck.position, groundDistance, startLineMask);
+        if (isStarted)
+        {
+            
+            started = true;
+        } 
+
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
         if(isGrounded && velocity.y < 0)
@@ -107,6 +123,9 @@ public class PlayerMovement : MonoBehaviour
 
         if (isBadGrounded)
         {
+            started = false;
+            speedVar = speed;
+            velocity.y = -2f;
             playerBody.position = spawnPoint.position;
             playerBody.rotation = Quaternion.Euler(0f, 0f, 0f);
         }
@@ -115,8 +134,10 @@ public class PlayerMovement : MonoBehaviour
 
         if (isFinished)
         {
+            Cursor.lockState = CursorLockMode.Confined;
+            leaderboardCanvas.enabled = true;
+            leaderboard.ShowInfo();
             finished = true;
-            Debug.Log("Finshed");
         }
     }
 }

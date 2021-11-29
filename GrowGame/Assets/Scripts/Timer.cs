@@ -19,7 +19,7 @@ public class Timer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (playerMovemnt.finished == false)
+        if (playerMovemnt.finished == false && playerMovemnt.started)
         {
             if (playerMovemnt.isBadGrounded)
             {
@@ -28,18 +28,23 @@ public class Timer : MonoBehaviour
             t = Time.time - startTime;
 
             string minutes = ((int)t / 60).ToString();
-            float seconds = t % 60;
+            float s = t % 60;
 
-            if (seconds < 10)
+            if (s < 10)
             {
-                string seconds1 = seconds.ToString("f3");
-                timerText.text = minutes + ":0" + seconds1.Substring(0, 1) + ":" + seconds1.Substring(2);
+                string seconds = s.ToString("f3");
+                timerText.text = minutes + ":0" + seconds.Substring(0, 1) + ":" + seconds.Substring(2);
             }
             else
             {
-                string seconds1 = seconds.ToString("f3");
-                timerText.text = minutes + ":" + seconds1.Substring(0, 2) + ":" + seconds1.Substring(3);
+                string seconds = s.ToString("f3");
+                timerText.text = minutes + ":" + seconds.Substring(0, 2) + ":" + seconds.Substring(3);
             }
+        }
+        else
+        {
+            startTime = Time.time;
+            timerText.text = "0:00:000";
         }
     }
 }
