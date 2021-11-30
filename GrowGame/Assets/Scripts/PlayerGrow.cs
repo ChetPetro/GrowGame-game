@@ -17,31 +17,36 @@ public class PlayerGrow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButton(0) && Input.GetMouseButton(1))
+        if (playerMovement.started)
         {
+            if (Input.GetMouseButton(0) && Input.GetMouseButton(1))
+            {
 
-        }else if(Input.GetMouseButton(0))
-        {
-            if(scale < 3.0f)
-            {
-                scale += scaleDiff * Time.deltaTime;
-            }else if(scale > 3.0f)
-            {
-                scale = 3.0f;
             }
-
-        }else if(Input.GetMouseButton(1))
-        {
-
-            if (scale > 0.25f)
+            else if (Input.GetMouseButton(0))
             {
-                scale -= scaleDiff * Time.deltaTime;
-            }
-            else if (scale < 0.25f)
-            {
-                scale = 0.25f;
-            }
+                if (scale < 3.0f)
+                {
+                    scale += scaleDiff * Time.deltaTime;
+                }
+                else if (scale > 3.0f)
+                {
+                    scale = 3.0f;
+                }
 
+            }
+            else if (Input.GetMouseButton(1))
+            {
+
+                if (scale > 0.25f)
+                {
+                    scale -= scaleDiff * Time.deltaTime;
+                }
+                else if (scale < 0.25f)
+                {
+                    scale = 0.25f;
+                }
+            }
         }
     }
 }

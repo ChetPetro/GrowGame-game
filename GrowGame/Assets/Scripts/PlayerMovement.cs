@@ -123,6 +123,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (isBadGrounded)
         {
+            playerGrow.scale = 1f;
             started = false;
             speedVar = speed;
             velocity.y = -2f;
