@@ -5,9 +5,7 @@ using UnityEngine;
 public class Generation : MonoBehaviour
 {
     public float time = 0f;
-    public float spawnRate = 1f;
     public float objectInterval = 3f;
-    private float rateChange = 100f;
     private float offset = 0f;
     // Start is called before the first frame update
     void Start()
@@ -18,10 +16,7 @@ public class Generation : MonoBehaviour
     void Update()
     {
         time += Time.deltaTime;
-        offset += 3  *(rateChange / 100) * Time.deltaTime;
-        spawnRate -= Time.deltaTime / rateChange;
-        rateChange += Time.deltaTime * 5;
-
+        offset += (8 - 2 * Mathf.Pow(0.99f, time) + 1f) * Time.deltaTime;
 
         if (objectInterval < time)
         {
@@ -32,7 +27,7 @@ public class Generation : MonoBehaviour
             }
             else
             {
-                newWall();
+                newCube();
             }
 
         }
@@ -43,8 +38,9 @@ public class Generation : MonoBehaviour
     void newCube()
     {
         GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        cube.transform.position = new Vector3(Random.Range(0,10) + offset, 0f, Random.Range(0, 10));
-        cube.transform.localScale = new Vector3(Random.Range(2, 5), Random.Range(2, 5), Random.Range(2, 5));
+        cube.layer = 6;
+        cube.transform.position = new Vector3(Random.Range(0,10) + offset, 0f, Random.Range(0, 25));
+        cube.transform.localScale = new Vector3(Random.Range(7, 13), Random.Range(3, 15), Random.Range(7, 13));
     }
 
     void newWall()
@@ -57,6 +53,11 @@ public class Generation : MonoBehaviour
         GameObject cubeR = GameObject.CreatePrimitive(PrimitiveType.Cube);
         GameObject cubeU = GameObject.CreatePrimitive(PrimitiveType.Cube);
         GameObject cubeD = GameObject.CreatePrimitive(PrimitiveType.Cube);
+
+        cubeL.layer = 6;
+        cubeR.layer = 6;
+        cubeU.layer = 6;
+        cubeD.layer = 6;
 
         cubeL.transform.position = new Vector3(x_pos, 0f, z_pos - Random.Range(9,11));
         cubeL.transform.localScale = new Vector3(1f, 30f, 15f);
