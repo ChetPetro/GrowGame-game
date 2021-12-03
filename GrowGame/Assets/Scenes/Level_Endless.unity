@@ -729,7 +729,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh27088
+  m_Name: pb_Mesh17230
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -893,7 +893,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh27202
+  m_Name: pb_Mesh17268
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1874,7 +1874,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1093603273}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -1886,7 +1886,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 82a153973bed9b44d9969362ce61a754, type: 2}
+  - {fileID: 2100000, guid: 983a1689006ab4140862143def0d4590, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2862,8 +2862,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61caf838288aed54d978fe06a999b4d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 0
-  objectInterval: 3
 --- !u!1 &1475126861
 GameObject:
   m_ObjectHideFlags: 0

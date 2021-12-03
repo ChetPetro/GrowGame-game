@@ -9,13 +9,25 @@ C:\Program Files\Unity\Hub\Editor\2020.3.22f1\Editor\Unity.exe
 -batchMode
 -noUpm
 -name
-AssetImportWorker0
+AssetImportWorker1
 -projectPath
 T:/Chet Petro/Projects/GrowGame-game/GrowGame
 -logFile
-Logs/AssetImportWorker0.log
+Logs/AssetImportWorker1.log
 -srvPort
 50273
 Successfully changed project path to: T:/Chet Petro/Projects/GrowGame-game/GrowGame
 T:/Chet Petro/Projects/GrowGame-game/GrowGame
 Using Asset Import Pipeline V2.
+Refreshing native plugins compatible for Editor in 86.93 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2020.3.22f1 (e1a7f79fd887)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2020.3.22f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path T:/Chet Petro/Projects/GrowGame-game/GrowGame/Assets
+GfxDevice: creating device client; threaded=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 10.0]
+    Renderer: Intel(R) Q45/Q43 Express Chipset (Microsoft Corporation - WDDM 1.1) (ID=0x2e12)
+    Vendor:   
+    VRAM:     128 MB
+    Driver:   8.15.10.2702
