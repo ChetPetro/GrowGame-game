@@ -31,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
     // Import badGroundCheck (death) objects and initilize variables
     public LayerMask badGroundMask;
     public bool isBadGrounded;
+    public bool badGrouded = false;
     public Transform spawnPoint;
 
     // Import finishLine objects and initilize variables
@@ -62,6 +63,7 @@ public class PlayerMovement : MonoBehaviour
         isStarted = Physics.CheckSphere(groundCheck.position, groundDistance, startLineMask);
         if (isStarted)
         {
+            badGrouded = false; 
             started = true;
         } 
 
@@ -133,11 +135,13 @@ public class PlayerMovement : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
 
-        // Check if the 
+        // Check if the player is touching the ground
         isBadGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, badGroundMask);
 
+        // If the player is touching the ground then reset them 
         if (isBadGrounded)
         {
+            badGrouded = true; 
             playerGrow.scale = 1f;
             started = false;
             speedVar = speed;
@@ -146,8 +150,10 @@ public class PlayerMovement : MonoBehaviour
             playerBody.rotation = Quaternion.Euler(0f, 0f, 0f);
         }
 
+        // Check if the player is touching the fnish line
         isFinished = Physics.CheckSphere(groundCheck.position, groundDistance, finshLineMask);
 
+        // Show the leaderboard when finished
         if (isFinished)
         {
             Cursor.lockState = CursorLockMode.Confined;

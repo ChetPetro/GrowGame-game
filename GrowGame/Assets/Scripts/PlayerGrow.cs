@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerGrow : MonoBehaviour
 {
+    // Initilize variables and import scripts
     public Transform playerBody;
     public PlayerMovement playerMovement;
     public float scaleDiff = 1f;
@@ -17,8 +18,10 @@ public class PlayerGrow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Allow the player to scale once they have crossed the finish line
         if (playerMovement.started)
         {
+            // Scale the player depeding on what mouse button they are pressing
             if (Input.GetMouseButton(0) && Input.GetMouseButton(1))
             {
 

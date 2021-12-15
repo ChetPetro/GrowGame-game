@@ -5,8 +5,11 @@ using UnityEngine.UI;
 
 public class Leaderboard : MonoBehaviour
 {
+    // Import timer script and leaderboard text object
     public Timer timer;
     public Text displayTime;
+
+    // Create a function that displays the final time on the leaderboard at the end of the level
     public void ShowInfo()
     {
         string minutes = ((int)timer.t / 60).ToString();

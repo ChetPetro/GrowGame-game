@@ -5,28 +5,34 @@ using UnityEngine;
 
 public class Timer : MonoBehaviour
 {
+    // Initilize variables and import scripts
     public Text timerText;
     public PlayerMovement playerMovemnt;
-    private float startTime;
+    private float startTime = 0;
     public float t;
 
     // Start is called before the first frame update
     void Start()
-    {
-        startTime = Time.time;
+    { 
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        // Update the time while the player is playing
         if (playerMovemnt.finished == false && playerMovemnt.started)
         {
+            // If the player dies, reset the time
             if (playerMovemnt.isBadGrounded)
             {
                 startTime = Time.time;
             }
+
+            // Update the time 
             t = Time.time - startTime;
 
+            // Display the time to the screen
             string minutes = ((int)t / 60).ToString();
             float s = t % 60;
 
