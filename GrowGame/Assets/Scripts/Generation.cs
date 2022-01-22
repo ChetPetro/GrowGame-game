@@ -7,9 +7,10 @@ public class Generation : MonoBehaviour
     // Initilize variables
     private float time = 0f;
     private float objectInterval = 3f;
-    private float offset = 0f;
+    public float offset = 0f;
     public PlayerMovement playerMovement;
     private GameObject cube;
+    public WallOfDeath wallOfDeath;
 
     // Start is called before the first frame update
     void Start()
@@ -21,13 +22,16 @@ public class Generation : MonoBehaviour
     void Update()
     {
         // Reset the game when die
-        if (playerMovement.badGrouded)
+        if (playerMovement.badGrouded || wallOfDeath.isWalled)
         {
+            playerMovement.badGrouded = true;
             time = 0f;
             offset = 0f;
             objectInterval = 3f;
             cube = GameObject.Find("generatedCube");
             Destroy(cube);
+            wallOfDeath.isWalled = false;
+            wallOfDeath.wallTransform.position = new Vector3(-100, 0f, 0f);
         }
 
         if (playerMovement.started)

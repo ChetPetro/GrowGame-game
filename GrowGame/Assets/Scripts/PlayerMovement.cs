@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     public Transform playerBody;
     public Timer timerText;
     public Leaderboard leaderboard;
+    MainMenu mainMenu;
 
     // Initilize important variable for player movement (set values != real values)
     public float scaleChange = 0.75f;
@@ -25,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
 
     // Import groundCheck objects and initilize variables
     public Transform groundCheck;
-    public float groundDistance = 0.4f;
+    public float groundDistance = 2f;
     public LayerMask groundMask;
 
     // Import badGroundCheck (death) objects and initilize variables
@@ -47,20 +49,28 @@ public class PlayerMovement : MonoBehaviour
     private bool isStarted;
     public bool started;
 
-
     // Start is called before the first frame update
     void Start()
     {
         speedVar = speed;
         finished = false;
         started = false;
+        mainMenu = GameObject.FindGameObjectWithTag("MainMenu").GetComponent<MainMenu>();
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        // Go to nmenu when escape is pressed
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            Cursor.lockState = CursorLockMode.Confined;
+            SceneManager.LoadScene(0);
+        }
+
         // Check if the player has crossed the start line
-        isStarted = Physics.CheckSphere(groundCheck.position, groundDistance, startLineMask);
+        isStarted = Physics.CheckSphere(groundCheck.position, groundDistance * playerGrow.scale, startLineMask);
         if (isStarted)
         {
             badGrouded = false; 
@@ -68,7 +78,7 @@ public class PlayerMovement : MonoBehaviour
         } 
 
         // Check if the player is touching the ground
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance * playerGrow.scale, groundMask);
 
         // Push the player into the groud if they are touching the ground
         if(isGrounded && velocity.y < 0)
@@ -121,9 +131,14 @@ public class PlayerMovement : MonoBehaviour
         {
             speedVar = speed;
         }
-        
-         // move the player every frame based on the move vector/speed/scale
-         controller.Move(move * speedVar * playerGrow.scale * Time.deltaTime);
+
+        if(finished == false)
+        {
+           // move the player every frame based on the move vector/speed/scale
+           controller.Move(move * speedVar * playerGrow.scale * Time.deltaTime);
+        }
+
+
 
         // If jumping and on ground then jump
         if (Input.GetButtonDown("Jump") && isGrounded)
@@ -139,8 +154,10 @@ public class PlayerMovement : MonoBehaviour
         isBadGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, badGroundMask);
 
         // If the player is touching the ground then reset them 
-        if (isBadGrounded)
+        if (isBadGrounded || mainMenu.resetButton)
         {
+            Cursor.lockState = CursorLockMode.Locked;
+            leaderboardCanvas.enabled = false;
             badGrouded = true; 
             playerGrow.scale = 1f;
             started = false;
@@ -148,6 +165,9 @@ public class PlayerMovement : MonoBehaviour
             velocity.y = -2f;
             playerBody.position = spawnPoint.position;
             playerBody.rotation = Quaternion.Euler(0f, 0f, 0f);
+            finished = false;
+            mainMenu.resetButton = false;
+            
         }
 
         // Check if the player is touching the fnish line
@@ -156,6 +176,7 @@ public class PlayerMovement : MonoBehaviour
         // Show the leaderboard when finished
         if (isFinished)
         {
+            playerBody.position = spawnPoint.position;
             Cursor.lockState = CursorLockMode.Confined;
             leaderboardCanvas.enabled = true;
             leaderboard.ShowInfo();

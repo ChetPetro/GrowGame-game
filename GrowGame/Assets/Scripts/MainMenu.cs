@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    public bool resetButton = false;
+
     // Move to the next scene in the scene index when PlayGame() is called
     public void PlayGame()
     {
@@ -16,5 +18,17 @@ public class MainMenu : MonoBehaviour
     {
         Debug.Log("Quit");
         Application.Quit();
+    }
+
+    // Resets Game
+    public void ResetGame()
+    {
+        resetButton = true;
+    }
+
+    //Load scene by index number
+    public void LoadScene(int sceneNumber)
+    {
+        SceneManager.LoadScene(sceneNumber);
     }
 }
